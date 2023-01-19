@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load static %}
+    <style>
+        #map {
+            height: 100vh;
+            padding: 0%; 
+        }
+        #arrows{
+            position: fixed;
+            z-index: 3;
+            bottom: 0;
+            right: 0;
+            width: 15vw;
+            padding-bottom: 3vh;
+        }
+        .glyphicon {
+            font-size: 7vh;
+        }
+    </style>
+    <title>QRGuide</title>
+</head>
+<body>
+    <div id="map" style="z-index: 2">
+
+    </div>
+    <div id="arrows">
+        {% if up %}
+            <a href="../../floor/{{ fu }}">
+                <span class="glyphicon glyphicon-circle-arrow-up" style="height: 2vh; width: 2w; padding-bottom: 1vh;"></span>
+            </a>
+        {% endif %}
+        {% if down %}
+            <a href="../../floor/{{ fd }}" style="padding-top: 1vh;">
+                <span class="glyphicon glyphicon-circle-arrow-down" style="height: 3vh; width: 2vw;"></span>
+            </a>
+        {% endif %}
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+    <script>
+        var map = L.map('map', {
+            center: [400, 350],
+            zoom: -2,
+            minZoom: -6,
+            crs: L.CRS.Simple,
+        });
+        var bounds = [[0,0], [800, 700]];
+        var image = L.imageOverlay('../../../../../{{ img }}', bounds)
+        map.fitBounds(bounds);
+        image.addTo(map) 
+    </script>
+</body>
+</html>
