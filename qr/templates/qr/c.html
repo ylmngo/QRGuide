@@ -58,59 +58,5 @@
         img_ele.setAttribute("id", "clgmap")
         img_ele.style.pointerEvents = "auto"; 
     </script>
-    <!-- <script src="jquery-3.6.3.min.js"></script> -->
-    <!-- <script>
-        $(document).ready(function() {
-            var inArea, 
-                map = $('#clgmap'),
-                single_opts = {
-                    fillColor: '000000',
-                    fillOpacity: 0,
-                    stroke: true, 
-                    strokeColor: 'ff0000', 
-                    strokeWidth: 2
-                },
-                all_opts = {
-                    fillColor: 'ffffff', 
-                    fillOpacity: 0.6, 
-                    stroke: true, 
-                    strokeWidth: 2, 
-                    strokeColor: 'ffffff', 
-                }
-                initial_opts = {
-                    mapKey: 'data-name',
-                    isSelectable: false, 
-                    onmouseover: function (data) {
-                        inArea = true; 
-                    },
-                    onmouseout: function(data) {
-                        inArea = false; 
-                    }
-                };
-                opts = $.extend({}, all_opts, initial_opts, single_opts); 
-
-                map.mapster('unbind')
-                    .mpaster(opts) 
-                    .bind('mouseover', function(){
-                        if(!inArea) {
-                            map.mapster('set_options', all_opts)
-                                .mapster('set', true, 'all')
-                                .mapster('set_options', single_opts); 
-                        }
-                    }).bind('mouseout', function() {
-                        if(!inArea) {
-                            map.mapster('set', false, 'all')
-                        }
-                    })
-        })
-    </script> -->
-    <script>
-        $('img[usemap]').mapster('highlight', {
-            fillColor: 'ff0000',
-            stroke: true,
-            singleSelect: true
-        });
-
-    </script> 
 </body>
 </html>     
