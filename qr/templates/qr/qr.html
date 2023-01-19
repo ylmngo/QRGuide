@@ -24,6 +24,14 @@
             width: 15vw;
             padding-bottom: 3vh;
         }
+        #backarrow{
+            position: fixed;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            width: 15vw;
+            padding-bottom: 3vh;
+        }
         .glyphicon {
             font-size: 7vh;
         }
@@ -33,6 +41,11 @@
 <body>
     <div id="map" style="z-index: 2">
 
+    </div>
+    <div id="backarrow">
+        <a href="../../../../college">
+            <span class="glyphicon glyphicon-circle-arrow-left" style="height: 2vh; width: 2w; padding-bottom: 1vh;"></span>
+        </a>
     </div>
     <div id="arrows">
         {% if up %}
@@ -51,6 +64,7 @@
     crossorigin=""></script>
     <script>
         var map = L.map('map', {
+            zoomControl: false, 
             center: [400, 350],
             zoom: -2,
             minZoom: -6,

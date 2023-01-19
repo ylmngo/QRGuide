@@ -16,6 +16,8 @@ class Block(models.Model):
     img  = models.CharField(max_length=64)
     aimg = models.CharField(max_length=64)
     num  = models.IntegerField()
+    lower = models.IntegerField()
+    upper = models.IntegerField()
 
     def __str__(self): 
         return self.name 
