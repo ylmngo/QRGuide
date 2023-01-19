@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="ImageMapster/dist/jquery.imagemapster.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #map {
+            height: 100vh;
+            padding: 0%;
+        }
+        #arrows{
+            position: fixed;
+            z-index: 10;
+            bottom: 0;
+            right: 0;
+            width: 15vw;
+            padding-bottom: 3vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map" style="z-index: 2;">
+    </div>
+    <map name="imagemap">
+        <area shape="rect" coords="363,353,432,435" href="block/2/floor/4"  alt="Block-4">
+        <area shape="rect" coords="441,513.5,499,555" href="block/1/floor/6" alt="Block-5">
+    </map>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+    <script>
+        //for displaying map
+        var map = L.map('map', {
+            center: [500, 500],
+            zoom: -4,
+            crs: L.CRS.Simple,
+        });
+        var bounds = [[0,0], [1000, 1000]]; 
+        var image = L.imageOverlay('../static/qr/images/anda.jpg', bounds)
+        map.fitBounds(bounds)
+        image.addTo(map) 
+        img_ele = image.getElement() 
+        
+         map.on('click', function(e) {
+            alert("Lat, Long: " + e.latlng.lat + " , " + e.latlng.lng)
+        });
+        img_ele.setAttribute("title", "Image Map")
+        img_ele.setAttribute("usemap", "#imagemap") 
+        img_ele.setAttribute("id", "clgmap")
+        img_ele.style.pointerEvents = "auto"; 
+    </script>
+    <!-- <script src="jquery-3.6.3.min.js"></script> -->
+    <!-- <script>
+        $(document).ready(function() {
+            var inArea, 
+                map = $('#clgmap'),
+                single_opts = {
+                    fillColor: '000000',
+                    fillOpacity: 0,
+                    stroke: true, 
+                    strokeColor: 'ff0000', 
+                    strokeWidth: 2
+                },
+                all_opts = {
+                    fillColor: 'ffffff', 
+                    fillOpacity: 0.6, 
+                    stroke: true, 
+                    strokeWidth: 2, 
+                    strokeColor: 'ffffff', 
+                }
+                initial_opts = {
+                    mapKey: 'data-name',
+                    isSelectable: false, 
+                    onmouseover: function (data) {
+                        inArea = true; 
+                    },
+                    onmouseout: function(data) {
+                        inArea = false; 
+                    }
+                };
+                opts = $.extend({}, all_opts, initial_opts, single_opts); 
+
+                map.mapster('unbind')
+                    .mpaster(opts) 
+                    .bind('mouseover', function(){
+                        if(!inArea) {
+                            map.mapster('set_options', all_opts)
+                                .mapster('set', true, 'all')
+                                .mapster('set_options', single_opts); 
+                        }
+                    }).bind('mouseout', function() {
+                        if(!inArea) {
+                            map.mapster('set', false, 'all')
+                        }
+                    })
+        })
+    </script> -->
+    <script>
+        $('img[usemap]').mapster('highlight', {
+            fillColor: 'ff0000',
+            stroke: true,
+            singleSelect: true
+        });
+
+    </script> 
+</body>
+</html>     
