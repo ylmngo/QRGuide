@@ -16,8 +16,9 @@ def c_view(request):
 def b_view(request, bid): 
     template = loader.get_template('qr/c.html')
     c = College.objects.get(id=0)
+    block = College.objects.get(id=bid)
     context  = {
-        'c': c, 
+        'c': block.aimg, 
         'img': c.aimg,
     }
     return HttpResponse(template.render(context, request))
